@@ -3,7 +3,10 @@
 A robust dual-mode (CLI + Web) University Management System written in Java and powered by Spring Boot. This application simulates a core academic portal handling distinct roles for **Administrators**, **Professors**, and **Students**. It is powered by a relational MySQL database via JDBC and Spring Data JdbcTemplate.
 
 ## 🚀 Live Demo
-*(Insert Live URL Here after deployment)*
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20Application-success?style=for-the-badge)](https://university-management-system-qe5k.onrender.com/)
+
+**Live Application:** https://university-management-system-qe5k.onrender.com/
+*(Note: Because this is hosted on a free Render instance, the first request may take up to 50 seconds while the server wakes up from sleep.)*
 
 ## Features
 
