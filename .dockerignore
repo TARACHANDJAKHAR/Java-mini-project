@@ -1,0 +1,10 @@
+.git
+target/
+.mvn
+mvnw
+mvnw.cmd
+.env
+.idea
+*.iml
+.vscode
+database/

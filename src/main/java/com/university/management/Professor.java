@@ -1,4 +1,4 @@
-package com.Assignment1java;
+package com.university.management;
 
 import java.sql.*;
 import java.sql.DriverManager;
@@ -9,18 +9,13 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Vector;
 
-public class Proffesor extends User
+public class Professor extends User
 {    String pname;
-	Proffesor(String username1){
+	Professor(String username1){
 
-        try {
-        	Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch(ClassNotFoundException e) {
-        	System.out.println(e.getMessage());
-        }
       	try {
     			String query="select * from professor where professorid= ?";
-    			Connection con=DriverManager.getConnection(URL, usernamee, password1);
+    			Connection con = DatabaseUtil.getConnection();
     			PreparedStatement st=con.prepareStatement(query);
     			st.setString(1, username1);
     			ResultSet rs=st.executeQuery();
@@ -99,7 +94,7 @@ public class Proffesor extends User
     		 System.out.println("enter the new timing");
     		 String timing=sc.next();
     		 try {
-    			 Connection con1=DriverManager.getConnection(URL, usernamee, password1);
+    			 Connection con1=DatabaseUtil.getConnection();
 				PreparedStatement st1 = con1.prepareStatement(query1);
 				st1.setString(1, timing);
 				st1.setString(2, courseid1);
@@ -140,7 +135,7 @@ public class Proffesor extends User
     		 System.out.println("enter the new credit");
     		 int credit=sc.nextInt();
     		 try {
-    			 Connection con1=DriverManager.getConnection(URL, usernamee, password1);
+    			 Connection con1=DatabaseUtil.getConnection();
 				PreparedStatement st1 = con1.prepareStatement(query1);
 				st1.setInt(1,credit );
 				st1.setString(2, courseid1);
@@ -178,7 +173,7 @@ public class Proffesor extends User
      		 String  pre=sc.nextLine();
      		 
      		 try {
-     			 Connection con1=DriverManager.getConnection(URL, usernamee, password1);
+     			 Connection con1=DatabaseUtil.getConnection();
  				PreparedStatement st1 = con1.prepareStatement(query1);
  				st1.setString(1,pre );
  				st1.setString(2, courseid1);
@@ -202,7 +197,7 @@ public class Proffesor extends User
     		  String query = "UPDATE Course SET Syllabus = ? WHERE CourseID = ?";
 
     		  try {
-    		      Connection con = DriverManager.getConnection(URL, usernamee, password1);
+    		      Connection con = DatabaseUtil.getConnection();
     		      PreparedStatement st = con.prepareStatement(query);
 
     		      sc.nextLine();
@@ -265,7 +260,7 @@ public class Proffesor extends User
 			Vector<String> email = new Vector<>();
 		
 		try {
-			con1 = DriverManager.getConnection(URL, usernamee, password1);
+			con1 = DatabaseUtil.getConnection();
 			PreparedStatement st1 = con1.prepareStatement(query1);
 			st1.setString(1, username1);
 			ResultSet rs=st1.executeQuery();
@@ -314,7 +309,7 @@ public class Proffesor extends User
     String query="select coursename,courseid,credits,pre,syllabus from course where courseid in (select courseid from PROFESSORCOURse where professorid=?);";
      Connection con ;
      try {
-   	    con=DriverManager.getConnection(URL, usernamee, password1);
+   	    con=DatabaseUtil.getConnection();
    		PreparedStatement st=con.prepareStatement(query);
    		st.setString(1, username1);
    		ResultSet rs=st.executeQuery();
@@ -348,7 +343,7 @@ public class Proffesor extends User
 
         try {
             
-            Connection con = DriverManager.getConnection(URL, usernamee, password1);
+            Connection con = DatabaseUtil.getConnection();
             PreparedStatement st = con.prepareStatement(query);
 
            

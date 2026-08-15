@@ -1,10 +1,13 @@
-CREATE DATABASE assignment8;
-USE assignment8;
-select * from course;
+-- CREATE DATABASE assignment8;
+-- USE assignment8;
+-- select * from course;
+
+
 create table userinfo(
 username varchar(50),
-password varchar(50));
-insert userinfo values
+password varchar(50),
+type int);
+insert userinfo (username, password) values
 ("2401","12345"),("2402","12345"),("2403","12345"),("2404","12345"),("2405","12345"),("2406","12345"),("2407","12345"),("2408","12345"),("2409","12345"),("2410","12345"),
 ("2411","12345"),("2412","12345"),("2413","12345"),("2414","12345"),("2415","12345"),("2416","12345"),("2417","12345"),("2418","12345"),("2419","12345"),("2420","12345"),
 ("2301","12346"),("2302","12346"),("2303","12346"),("2304","12346"),("2305","12346"),("2306","12346"),("2307","12346"),("2308","12346"),("2309","12346"),("2310","12346"),
@@ -13,12 +16,16 @@ insert userinfo values
 ("2211","12347"),("2212","12347"),("2213","12347"),("2214","12347"),("2215","12347"),("2216","12347"),("2217","12347"),("2218","12347"),("2219","12347"),("2220","12347"),
 ("2101","12348"),("2102","12348"),("2103","12348"),("2104","12348"),("2105","12348"),("2106","12348"),("2107","12348"),("2108","12348"),("2109","12348"),("2110","12348"),
 ("2111","12348"),("2112","12348"),("2113","12348"),("2114","12348"),("2115","12348"),("2116","12348"),("2117","12348"),("2118","12348"),("2119","12348"),("2120","12348");
-insert userinfo values
+insert userinfo (username, password) values
 ('1', '123456'),('2', '123456'),('3', '123456'),('4', '123456'),('5', '123456'),('6', '123456'),('7', '123456'),('8', '123456'),('9', '123456'),('10', '123456'),
 ('11', '123456'),('12', '123456'),('13', '123456'),('14', '123456'),('15', '123456'),('16', '123456'),('17', '123456'),('18', '123456'),('19', '123456'),('20','123456');
-insert userinfo values ('100',1234);
-Select * from userinfo;
-drop table userinfo; 
+insert userinfo (username, password) values ('100',1234);
+
+SET SQL_SAFE_UPDATES = 0;
+UPDATE userinfo SET type = 2;
+UPDATE userinfo SET type = 3 WHERE length(username) <= 2;
+UPDATE userinfo SET type = 1 WHERE username = '100';
+
 use assignment8;
 select * from students;
 CREATE TABLE Students (
@@ -50,6 +57,15 @@ CREATE TABLE Course (
     Credits INT NOT NULL,
     Department VARCHAR(50),
     Semester INT
+);
+
+CREATE TABLE Registration (
+    StudentID INT,
+    CourseID INT,
+    RegistrationDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (StudentID) REFERENCES Students(StudentID) ON DELETE CASCADE,
+    FOREIGN KEY (CourseID) REFERENCES Course(CourseID) ON DELETE CASCADE,
+    PRIMARY KEY (StudentID, CourseID)
 );
 
 -- CREATE TABLE SemesterCourses (
@@ -404,7 +420,7 @@ CREATE TABLE Result (
     Course5 VARCHAR(2) NOT NULL ,
     totalcredit decimal(7,2)
 );
-drop table result;
+-- drop table result;
 INSERT INTO Result (StudentID, Course1, Course2, Course3, Course4, Course5) VALUES
 -- Students from 2101 to 2110
 (2101, 'A', 'B', 'C', 'A', 'B'),
@@ -509,7 +525,7 @@ create table professorcourse(
     CourseID int
   
 );
-drop table professorcourse;
+-- drop table professorcourse;
 INSERT INTO PROFESSORCOURse (ProfessorID, CourseID)
 VALUES
 (1, '101'), (1, '102'), (1, '103'), (1, '104'), (1, '105'), (1, '111'), (1, '112'), (1, '113'), (1, '114'), (1, '115'),
@@ -542,7 +558,7 @@ CREATE TABLE SCHEDULE (
     Timing VARCHAR(50)
     
 );
-drop table schedule;
+-- drop table schedule;
 -- Schedule for Semester 1
 INSERT INTO SCHEDULE (CourseID, Department, RoomNo, Timing) 
 VALUES 

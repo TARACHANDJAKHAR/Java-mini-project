@@ -1,4 +1,4 @@
-package com.Assignment1java;
+package com.university.management;
 
 import java.sql.*;
 import java.util.InputMismatchException;
@@ -13,18 +13,10 @@ public class Student extends User
   
      Student(String username1)
      {
-         try 
-         {
-         	Class.forName("com.mysql.cj.jdbc.Driver");
-         }
-         catch(ClassNotFoundException e) 
-         {
-         	System.out.println(e.getMessage());
-         }
        	try 
        	{
      			String query="select * from students where StudentID= ?";
-     			Connection con=DriverManager.getConnection(URL, usernamee, password1);
+     			Connection con = DatabaseUtil.getConnection();
      			
      			PreparedStatement st=con.prepareStatement(query);
      			st.setString(1, username1);
@@ -130,7 +122,7 @@ public class Student extends User
     	
 		try 
 		{
-			con = DriverManager.getConnection(URL, usernamee, password1);
+			con = DatabaseUtil.getConnection();
 			PreparedStatement st=con.prepareStatement(query);
 			
 			st.setString(1, this.department);
@@ -175,7 +167,7 @@ public class Student extends User
 		
 		try 
 		{
-			con = DriverManager.getConnection(URL, usernamee, password1);
+			con = DatabaseUtil.getConnection();
 			PreparedStatement st=con.prepareStatement(query);
 			
 			st.setString(1, this.department);
@@ -210,7 +202,7 @@ public class Student extends User
     		 
     		 try 
     		 {
-    				con = DriverManager.getConnection(URL, usernamee, password1);
+    				con = DatabaseUtil.getConnection();
     				PreparedStatement st=con.prepareStatement(query);
     				
     				st.setString(1, username1);
@@ -256,7 +248,7 @@ public class Student extends User
 				            { 
     					 try 
     					 {
-    						 con1 = DriverManager.getConnection(URL, usernamee, password1);
+    						 con1 = DatabaseUtil.getConnection();
     				             PreparedStatement st1 = con1.prepareStatement(query1);
     				            st1.setString(1, username1);
     				            st1.setInt(2, courseid);
@@ -314,7 +306,7 @@ public class Student extends User
         String query = "SELECT p.Name AS ProfessorName,s.Timing,s.RoomNo,c.CourseName FROM SCHEDULE s natural JOIN ProfessorCourse pc natural JOIN Professor p natural JOIN Course c WHERE c.Semester = ? AND c.Department = ? ;";
 
  try {
-     con = DriverManager.getConnection(URL, usernamee, password1);
+     con = DatabaseUtil.getConnection();
      PreparedStatement st = con.prepareStatement(query);
      st.setInt(1, this.semester);
      st.setString(2, this.department);
@@ -349,7 +341,7 @@ public class Student extends User
     	String query="select course1,course2,course3,course4,course5,totalcredit from result where studentid=?";
     	Connection con;
     	try {
-    		 con = DriverManager.getConnection(URL, usernamee, password1);
+    		 con = DatabaseUtil.getConnection();
     		 PreparedStatement st = con.prepareStatement(query);
     		 st.setString(1, username1);
     		 String[] a=new String[5];
@@ -411,7 +403,7 @@ public class Student extends User
         String query = "DELETE FROM Registration WHERE StudentID = ? AND CourseID = ?";
 
         try {
-        	Connection con = DriverManager.getConnection(URL, usernamee, password1);
+        	Connection con = DatabaseUtil.getConnection();
              PreparedStatement pst = con.prepareStatement(query);
 
            
@@ -460,7 +452,7 @@ public class Student extends User
 		  String yourQuery=sc1.nextLine();
 		  Connection con;
 		  try {
-			  con=DriverManager.getConnection(URL, usernamee, password1);
+			  con=DatabaseUtil.getConnection();
 			  PreparedStatement st=con.prepareStatement(query);
 			  st.setString(1, username1);
 			  st.setString(2,yourQuery );
@@ -480,7 +472,7 @@ public class Student extends User
 				  String query1="Select status,quer from inquiry where studentid=?";
 				  Connection con1;
 				  try {
-					  con1=DriverManager.getConnection(URL, usernamee, password1);
+					  con1=DatabaseUtil.getConnection();
 					  PreparedStatement st1=con1.prepareStatement(query1);
 					  st1.setString(1, username1);
 					  ResultSet rs1=st1.executeQuery();
@@ -507,7 +499,7 @@ public class Student extends User
 			// TODO Auto-generated method stub
 	    	String query="SELECT StudentID, CourseID, RegistrationDate FROM Registration where studentid = ?;";
 	    	try { 
-	    		Connection con = DriverManager.getConnection(URL, usernamee, password1);
+	    		Connection con = DatabaseUtil.getConnection();
 	                PreparedStatement st = con.prepareStatement(query);
 	                st.setInt(1, Integer.parseInt(username1));
 	                ResultSet rs = st.executeQuery();

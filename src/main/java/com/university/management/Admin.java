@@ -1,4 +1,4 @@
-package com.Assignment1java;
+package com.university.management;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,11 +12,6 @@ import java.util.Scanner;
 public class Admin extends User 
 {   
 	Admin(){
-		try {
-        	Class.forName("com.mysql.cj.jdbc.Driver");
-        }catch(ClassNotFoundException e) {
-        	System.out.println(e.getMessage());
-        }
 	}
 	Scanner sc=new Scanner(System.in);
 	@Override
@@ -79,7 +74,7 @@ public class Admin extends User
 	    			 System.out.println("Enter the department  you want to view the course :");
 	    			 sc.nextLine();
 	    			 String department=sc.nextLine();
-					con=DriverManager.getConnection(URL, usernamee, password1);
+					con=DatabaseUtil.getConnection();
 					PreparedStatement st=con.prepareStatement(query);
 		    		st.setInt(1, semester);
 		    		st.setString(2, department);
@@ -107,7 +102,7 @@ public class Admin extends User
 	    		try {
 	    			System.out.println("Enter the course id you want to delete :");
 	    			int courseID=sc.nextInt();
-	    		    con = DriverManager.getConnection(URL, usernamee, password1);
+	    		    con = DatabaseUtil.getConnection();
 	    		    PreparedStatement st = con.prepareStatement(query);
 	    		    st.setInt(1, courseID);
 	    		    int row = st.executeUpdate();
@@ -124,7 +119,7 @@ public class Admin extends User
 	    	else if(key==3) {
 	    		String insertQuery = "INSERT INTO Course (CourseID, CourseName, Department, Semester, Credits) VALUES (?, ?, ?, ?, ?)";
 	    		try {
-	    		    con = DriverManager.getConnection(URL, usernamee, password1);
+	    		    con = DatabaseUtil.getConnection();
 	    		    PreparedStatement st = con.prepareStatement(insertQuery);
                      System.out.println("Enter the course detail you want to add:");
                      System.out.println("Enter the courseid");
@@ -179,7 +174,7 @@ public class Admin extends User
 				   String query = "SELECT StudentID, Name, Department, Semester, Email FROM Students WHERE Department = ? AND Semester = ?";
 				   
 				    try {
-				        con = DriverManager.getConnection(URL, usernamee, password1);
+				        con = DatabaseUtil.getConnection();
 				        PreparedStatement st = con.prepareStatement(query);
 				        
 				        System.out.println("Enter the department student data you want to know: ");
@@ -215,7 +210,7 @@ public class Admin extends User
 				   String query = "DELETE FROM Students WHERE StudentID = ?";
 				    
 				    try {
-				        con = DriverManager.getConnection(URL, usernamee, password1);
+				        con = DatabaseUtil.getConnection();
 				        PreparedStatement st = con.prepareStatement(query);
 				        
 				        System.out.println("Enter the student id who you want to remove ");
@@ -236,7 +231,7 @@ public class Admin extends User
 				  String query = "UPDATE Students SET Name = ?, Department = ?, Semester = ?, Email = ? WHERE StudentID = ?";
 				   
 				    try {
-				        con = DriverManager.getConnection(URL, usernamee, password1);
+				        con = DatabaseUtil.getConnection();
 				        PreparedStatement st = con.prepareStatement(query);
 				        System.out.println("Enter the detail of student you want to update:");
 				        System.out.println("Enter the student id ");
@@ -272,7 +267,7 @@ public class Admin extends User
 				   String query = "UPDATE Result SET Course1 = ?, Course2 = ?, Course3 = ?, Course4 = ?, Course5 = ? WHERE StudentID = ?";
 				   PreparedStatement st = null;
 			        try {
-			            con = DriverManager.getConnection(URL, usernamee, password1);
+			            con = DatabaseUtil.getConnection();
 			            st = con.prepareStatement(query);
                         System.out.println("Enter the student id where we want to update the result:");
                         int studentid= sc.nextInt();
@@ -316,7 +311,7 @@ public class Admin extends User
 			        String query2="INSERT INTO RESULT (studentid) values (?);";
 
 			        try {
-			            con = DriverManager.getConnection(URL, usernamee, password1);
+			            con = DatabaseUtil.getConnection();
 			            st = con.prepareStatement(query);
 			            st1=con.prepareStatement(query1);
 			            st2=con.prepareStatement(query2);
@@ -378,7 +373,7 @@ public class Admin extends User
 		        String query = "INSERT INTO PROFESSORCOURSE (ProfessorID, CourseID) VALUES (?, ?)";
                  Connection con=null;
 		        try {
-		        		con = DriverManager.getConnection(URL, usernamee, password1);
+		        		con = DatabaseUtil.getConnection();
 		             PreparedStatement st = con.prepareStatement(query) ;
                     System.out.println("Enter the proffesor id who you want to assign to course:");
                     int professorid=sc.nextInt();
@@ -416,7 +411,7 @@ public class Admin extends User
 					  String query = "SELECT * FROM inquiry";
                       
 				        try { 
-				        	con = DriverManager.getConnection(URL, usernamee, password1);
+				        	con = DatabaseUtil.getConnection();
 				             Statement stmt = con.createStatement();
 				             ResultSet rs = stmt.executeQuery(query);
 				                System.out.println("+------------+-------------------------------------+------------+");
@@ -447,7 +442,7 @@ public class Admin extends User
                      System.out.println("Enter the student id whose inquiry is resolved :");
                      int studentid=sc.nextInt();
 			        try { 
-			        	con = DriverManager.getConnection(URL, usernamee, password1);
+			        	con = DatabaseUtil.getConnection();
 			             PreparedStatement pst = con.prepareStatement(query);
 			            pst.setInt(1, studentid);
 			            pst.setString(2, query1);

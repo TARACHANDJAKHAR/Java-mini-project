@@ -1,4 +1,4 @@
-package com.Assignment1java;
+package com.university.management;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -30,14 +30,14 @@ public class MainManager
 			{
 			case 1:
 				newUser = new Admin();
-				newUser.login(x);
+				newUser.login(x, typeOfUser);
 				break;
 			case 2:
 				newUser = new Student(x);
 				newUser.login(x, typeOfUser);
 				break;
 			case 3:
-				newUser = new Proffesor(x);
+				newUser = new Professor(x);
 				newUser.login(x, typeOfUser);
 				break;
 			case 4:
